@@ -1,0 +1,23 @@
+01.  Download zip, unzip it. Delete old data from the 'datasets/train' folder.
+02.  Run command : conda create -n facerec python==3.6.9
+03.  Run command : conda activate facerec (now, open project in pycharm with this new environment)
+04.  Run command : pip install -r requirements.txt
+05.  In windows, above command will throw error for mxnet. So, Run command : conda install -c anaconda mxnet
+(optional) If there is cmake error, Run command : conda install -c anaconda cmake
+06.  Now comment the mxnet line in requirements.txt and then Run command : pip install -r requirements.txt
+07.  In windows, this time it will throw error for dlib. Below commands were tried:
+         conda install -c menpo dlib
+         pip install dlib
+         conda install -c anaconda cmake (and then) pip install dlib
+         pip install dlib==19.8.1 (this one worked for me)
+08.  There were some other dependency warnings for post Oct2020, pip install mxnet was done.
+     Some manual commenting/changes were done in 'requirements.txt' but old versions were just commented for later reference.
+09.  Comment line 16 in 'app.py' that is : from readme_renderer import txt
+     Same for line 151-159. These are two functions clear and clear2.
+10.  Error in project. Its taking images but not training on it. Fix : you need atleast two folders with images data to train.
+11.  Now train is working but predict is throwing error. Its doing only one frame prediction and then dlib exception.
+     This was fixed by changing line150 in 'facepredictor.py' to : rect = dlib.rectangle(int(bbox[0]), int(bbox[1]), int(bbox[2]), int(bbox[3]))
+     Addition of int typecasting is the bugfix here. This code is in 'src\predictor' location.
+12.  Everything working fine now. Repo is in ready to execute state now.
+13.  For future ease, rename the old file to 'requirements_old.txt' and Run command : pip freeze > requirements.txt
+     Please note, the 'requirements_old.txt' file has worked as per the above steps. New freeze is just for referencing.
